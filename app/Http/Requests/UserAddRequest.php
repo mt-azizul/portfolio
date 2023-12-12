@@ -22,7 +22,8 @@ class UserAddRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->route('user')??null; 
+        $userId = $this->route('user') ?? null;
+
         return [
             'username' => [
                 'string',

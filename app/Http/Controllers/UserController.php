@@ -43,9 +43,9 @@ class UserController extends Controller
         $user = User::create($request->except('profic'));
         if ($request->hasFile('profic')) {
             $imageName = $request->username.'.'.$request->profic->getClientOriginalExtension();
-            $path = $request->profic->storePubliclyAs('users', $imageName, 'public');
+            $path = $request->file('profic')->storePubliclyAs('users', $imageName, 'public');
             $url = Storage::url($path);
-            $user->profic = $url;
+            $user->profic = $imageName;
             $user->save();
         }
 
@@ -68,28 +68,30 @@ class UserController extends Controller
         $data[] = null;
         $data['page_title'] = 'User Edit';
         $data['user'] = $user;
-        return view('admin.users.create', $data);
+
+        return view('admin.users.edit', $data);
     }
 
     public function update(UserAddRequest $request, User $user)
     {
         $user->update($request->except('profic'));
         if ($request->hasFile('profic')) {
-            Storage::delete($user->profic);
-            $imageName = $request->username . '.' . $request->profic->getClientOriginalExtension();
+            Storage::delete($user->profic ?? '');
+            $imageName = $request->username.'.'.$request->profic->getClientOriginalExtension();
             $path = $request->profic->storePubliclyAs('users', $imageName, 'public');
             $url = Storage::url($path);
             $user->profic = $url;
             $user->save();
         }
-        return redirect()->route('users.index')->with('success', 'User Updated Successfully');
 
+        return redirect()->route('users.index')->with('success', 'User Updated Successfully');
 
     }
 
     public function destroy(User $user)
     {
         $user->delete();
+
         return redirect()->route('users.index')->with('success', 'User Deleted Successfully');
     }
 

@@ -185,6 +185,9 @@
             const formattedTimestamp = `${formattedHours12}:${formattedMinutes} ${ampm} ${formattedDay}/${formattedMonth}/${year}`;
             return formattedTimestamp;
         }
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
     @yield('js')
 </body>
