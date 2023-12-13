@@ -23,9 +23,10 @@ class EducationController extends Controller
     public function create()
     {
         $data['page_title'] = 'Education Information Add';
-        $data['model'] = "Education";
-        $user = User::findOrFail($_REQUEST['user_id']??null);
+        $data['model'] = 'Education';
+        $user = User::findOrFail($_REQUEST['user_id'] ?? null);
         $data['user'] = $user;
+
         return view('admin.educations.create', $data);
     }
 
@@ -35,6 +36,7 @@ class EducationController extends Controller
     public function store(StoreEducationRequest $request)
     {
         Education::create($request->all());
+
         return redirect()->route('users.index')->with('success', 'Education Data Added Successfully');
     }
 
@@ -61,6 +63,7 @@ class EducationController extends Controller
     public function update(UpdateEducationRequest $request, Education $education)
     {
         $education->update($request->all());
+
         return redirect()->back()->with('success', 'Education Data Updated Successfully');
     }
 

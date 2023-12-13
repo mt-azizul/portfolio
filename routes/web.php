@@ -22,9 +22,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'middleware' => ['auth']], function () {
     Route::resource('users', 'UserController');
     Route::resource('educations', 'EducationController');
+    Route::resource('skills', 'SkillController');
+    Route::resource('socials', 'SocialMediaController');
 
 });
 

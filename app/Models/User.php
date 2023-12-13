@@ -38,6 +38,19 @@ class User extends Authenticatable
 
     ];
 
+    public function skills()
+    {
+        return $this->hasMany(Skill::class);
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(Education::class);
+    }
+    public function socialMedia()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

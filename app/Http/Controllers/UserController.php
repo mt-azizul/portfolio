@@ -53,14 +53,13 @@ class UserController extends Controller
 
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-        if ($user) {
-            return $this->responseSuccess($user, 'User Fetched Successfully');
-        } else {
-            return $this->responseError('failed', 'User Not Found');
-        }
+        $data[] = null;
+        $data['page_title'] = 'User Profile';
+        $data['model'] = 'Users';
+        $data['user'] = $user;
+       return view('admin.users.show', $data);
     }
 
     public function edit(User $user)

@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Education extends Model
+class SocialMedia extends Model
 {
     use HasFactory;
-
-    protected $table = 'educations';
-
+    protected $table = 'social_media';
     protected $fillable = [
         'user_id',
-        'degree',
-        'field_of_study',
-        'institution',
-        'start_date',
-        'end_date',
+        'name',
+        'link',
+         
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
