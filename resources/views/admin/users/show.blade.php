@@ -113,6 +113,7 @@
 
                 </div>
             </div>
+            <!-- Education  -->
             <div class="row">
                 <div class="col-md-12">
                     <!-- Education Box -->
@@ -162,6 +163,43 @@
                             @forelse ($user->socialMedia as $media)
                             <strong><i class="fas fa-book" style="font-size:18px"> </i>  {{ ucfirst($media->name) }}</strong>
                             <a class="float-right" href ="{{ $media->link }}" target="_blank">{{ $media->link }}</a>
+                            <hr>
+                            @empty
+                            @endforelse
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+            
+                </div>
+            </div>
+            {{-- Projects --}}
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Education Box -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <div class="row justify-content-between d-flex">
+                                <h3 class="card-title">Projects</h3>
+                                <a href="{{ route('socials.edit', $user->id) }}" class="btn btn-sm btn-danger"><b><i
+                                            class="fa fa-edit"></i></b></a>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            @forelse ($user->projects as $project)
+                            <strong>
+                                <i class="fas fa-project-diagram"></i> {{ ucfirst($project->title) }}
+                            </strong>
+                            <br>
+                            <p class="text-muted float-left">
+                                {{ $project->started_at }} -
+                                {{ $project->end_at }}
+                            </p>
+                            <a class="float-right" href="{{ $project->live_link }}" target="_blank">{{ $project->live_link }}</a>
+                            <br>
+                            <a class="float-right" href="{{ $project->repo_link }}" target="_blank">{{ $project->repo_link }}</a>
+                            <br>
                             <hr>
                             @empty
                             @endforelse
