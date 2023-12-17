@@ -22,7 +22,6 @@ class UpdateEducationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer',
             'degree' => 'required|string',
             'field_of_study' => 'nullable|string',
             'institution' => 'required|string',

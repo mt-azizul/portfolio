@@ -53,8 +53,11 @@ class EducationController extends Controller
      */
     public function edit(Education $education)
     {
+        $data['page_title'] = 'Education Information Update';
+        $data['model'] = 'Educations';
+        $data['education'] = $education;
 
-        return view('admin.educations.edit', compact('education'));
+        return view('admin.educations.edit', $data);
     }
 
     /**
@@ -64,7 +67,7 @@ class EducationController extends Controller
     {
         $education->update($request->all());
 
-        return redirect()->back()->with('success', 'Education Data Updated Successfully');
+        return redirect()->route('users.show', $education->user_id)->with('success', 'Education Data Updated Successfully');
     }
 
     /**
@@ -72,6 +75,8 @@ class EducationController extends Controller
      */
     public function destroy(Education $education)
     {
-        //
+        $education->delete();
+
+        return redirect()->back()->with('success', 'Education Data Deleted Successfully');
     }
 }

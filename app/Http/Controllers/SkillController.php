@@ -37,15 +37,14 @@ class SkillController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $data = [];
-        foreach($request->name as $key => $skill_name) {
+        foreach ($request->name as $key => $skill_name) {
             $data = [
                 'name' => $skill_name,
                 'level' => $request->level[$key],
             ];
             $user->skills()->create($data);
-            
+
         }
-        
 
         return redirect()->route('users.show', $user->id);
     }
@@ -63,7 +62,11 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        //
+        $data['page_title'] = 'Skill Information Update';
+        $data['model'] = 'Skills';
+        $data['skill'] = $skill;
+
+        return view('admin.skills.edit', $data);
     }
 
     /**
@@ -71,7 +74,9 @@ class SkillController extends Controller
      */
     public function update(UpdateSkillRequest $request, Skill $skill)
     {
-        //
+        $skill->update($request->all());
+
+        return redirect()->route('users.show', $skill->user_id)->with('success', 'Skill updated successfully');
     }
 
     /**
@@ -79,6 +84,8 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+
+        return redirect()->back()->with('success', 'Skill deleted successfully');
     }
 }

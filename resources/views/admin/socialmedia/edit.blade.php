@@ -29,160 +29,35 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{ route('users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('socials.update',$socialMedia->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>First Name:</label>
-                                    <input type="text" name="first_name" value="{{$user->first_name}}"
-                                        class="form-control filter-input" placeholder="First Name">
-                                    @error('first_name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Last Name:</label>
-                                    <input type="text" name="last_name" value="{{ $user->last_name}}"
-                                        class="form-control filter-input" placeholder="Last Name">
-                                    @error('last_name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
+                        <div class="row justify-content-between">
+                            <h4>Social Media Info</h4> <button class="btn btn-sm btn-success" id="addBtn"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label>Username:</label>
-                                    <input type="text" name="username" value="{{ $user->username}}"
-                                        class="form-control filter-input" placeholder="Enter User Name" required>
-                                    @error('username')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Email:</label>
-                                    <input type="text" name="email" value="{{ $user->email}}"
-                                        class="form-control filter-input" placeholder="Enter email" required>
-                                    @error('email')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Phone:</label>
-                                    <input type="text" name="phone" value="{{ $user->phone}}"
-                                        class="form-control filter-input" placeholder="Enter Phone">
-                                    @error('phone')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Date of Birth:</label>
-                                    <input type="date" name="dob" value="{{ $user->dob}}"
-                                        class="form-control filter-input">
-                                    @error('dob')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Area:</label>
-                                    <input type="text" name="area" value="{{ $user->area}}"
-                                        class="form-control filter-input" placeholder="Enter Area">
-                                    @error('area')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>City:</label>
-                                    <input type="text" name="city" value="{{ $user->city}}"
-                                        class="form-control filter-input" placeholder="City">
-                                    @error('city')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Country:</label>
-                                    <input type="text" name="country" value="{{ $user->country}}"
-                                        class="form-control filter-input" placeholder="Country">
-                                    @error('country')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Residence:</label>
-                                    <input type="text" name="residence" value="{{ $user->residence}}"
-                                        class="form-control filter-input" placeholder="Residence">
-                                    @error('residence')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group div">
-                                    <label>Profile Photo:</label>
-                                    <input type="file" id="file" name="profic" value="{{ $user->profic}}"
-                                        class="form-control filter-input" placeholder="Profile Photo">
-                                    @error('profic')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Blood Group:</label>
-                                    <select name="blood_group" value="{{ $user->blood_group}}" class="form-control"
-                                        required>
-                                        <option {{ $user->blood_group=="A+"?"selected":"" }} value="A+">A+</option>
-                                        <option {{ $user->blood_group=="A-"?"selected":"" }} value="A-">A-</option>
-                                        <option {{ $user->blood_group=="B+"?"selected":"" }} value="B+">B+</option>
-                                        <option {{ $user->blood_group=="B-"?"selected":"" }} value="B-">B-</option>
-                                        <option {{ $user->blood_group=="O+"?"selected":"" }} value="O+">O+</option>
-                                        <option {{ $user->blood_group=="O-"?"selected":"" }} value="O-">O-</option>
-                                        <option {{ $user->blood_group=="AB+"?"selected":"" }} value="AB+">AB+</option>
-                                        <option {{ $user->blood_group=="AB-"?"selected":"" }} value="AB-">AB-</option>
+                                    <label class="required"> Name:</label>
+                                    <select name="name" class="form-control filter-input" required>
+                                        <option value="">Select</option>
+                                        <option value="linkedin" @selected($socialMedia->name =='linkedin')>Linkedin</option>
+                                        <option value="youtube" @selected($socialMedia->name =='youtube')>Youtube</option>
+                                        <option value="facebook" @selected($socialMedia->name =='facebook')>Facebook</option>
+                                        <option value="x" @selected($socialMedia->name =='x')>X (Formarly Twitter)</option>
+                                        <option value="instagram" @selected($socialMedia->name =='instagram')>Instagram</option>
+                                        <option value="pinterest" @selected($socialMedia->name =='pinterest')>Pinterest</option>
+                                        <option value="github" @selected($socialMedia->name =='github')>Github</option>
+                                        <option value="personal" @selected($socialMedia->name =='personal')>Personal Site</option>
+                                        <option value="others" @selected($socialMedia->name =='others')>Others</option>
                                     </select>
-                                    @error('blood_group')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label>Bio:</label>
-                                    <textarea type="text" name="bio"
-                                        class="form-control filter-input" placeholder="Enter Bio">{{ $user->bio}}</textarea>
-                                    @error('bio')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <label>Profile Link:</label>
+                                <input type="url" name="link" value="{{old('link',$socialMedia->link)}}" class="form-control filter-input" placeholder="Enter Link" required>
                                 </div>
                             </div>
                         </div>

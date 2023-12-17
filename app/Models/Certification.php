@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Certification extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'user_id',
+        'name',
+        'type',
+        'issued_date',
         'description',
-        'live_link',
-        'repo_link',
-        'started_at',
-        'end_at',
+        'link',
     ];
 
     public function user()

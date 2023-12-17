@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Project;
 use App\Models\User;
 
 class ProjectController extends Controller
@@ -34,10 +34,10 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreProjectRequest $request)
-    {   
+    {
         $user = User::findOrFail($request->user_id);
         $data = [];
-        foreach($request->title as $key => $title) {
+        foreach ($request->title as $key => $title) {
             $data = [
                 'title' => $title,
                 'description' => $request->description[$key],
@@ -47,9 +47,9 @@ class ProjectController extends Controller
                 'end_at' => $request->end_at[$key],
             ];
             $user->projects()->create($data);
-            
+
         }
-        
+
         return redirect()->route('users.show', $user->id)->with('success', 'Project Add successfully');
     }
 
@@ -66,7 +66,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $data['page_title'] = 'Project Information Update';
+        $data['model'] = 'Projects';
+        $data['project'] = $project;
+
+        return view('admin.projects.edit', $data);
     }
 
     /**
@@ -74,7 +78,9 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->all());
+
+        return redirect()->route('users.show', $project->user_id)->with('success', 'Project updated successfully');
     }
 
     /**
@@ -82,6 +88,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->back()->with('success', 'Project Data Deleted Successfully');
     }
 }

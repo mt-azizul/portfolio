@@ -41,8 +41,6 @@
                                 {{-- <th>Residence</th>
                                 <th>Bio</th>
                                 <th>Blood Group</th> --}}
-                                <th></th>
-                                <th></th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,7 +52,7 @@
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>
-                                    <img src="{{url($user->profic)}}" onerror="this.src='../../dist/img/avatar5.png'" class="img-fluid" height="80" width="80" loading="lazy" alt="">
+                                    <img src="{{url($user->profic)}}" class="img-fluid" height="80" width="80" loading="lazy" alt="">
                                 </td>
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->username }}</td>
@@ -69,33 +67,8 @@
                                 <td>{{ $user->blood_group }}</td> --}}
 
                                 <!-- Add more <td> cells as needed for additional fields -->
+
                                 <td class="d-flex">
-                                    <a href="{{ route('educations.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Education Info Add">Edu </a>
-                                    &nbsp;
-                                    <a href="{{ route('certifications.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-success"
-                                        data-toggle="tooltip" data-placement="top" title="Certificate Add">Certificate </a>
-                                     &nbsp;
-                                    <a href="{{ route('skills.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Skill Info Add">Skill </a>
-                                    
-                                </td>
-                                <td >
-                                    <div class="d-flex">
-                                    <a href="{{ route('socials.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-success" data-toggle="tooltip"
-                                        data-placement="top" title="Social Media Link Add">Social </a>
-                                    &nbsp;
-                                    <a href="{{ route('experiences.create',['user_id' =>$user->id]) }}" class="btn btn-sm btn-primary" data-toggle="tooltip"
-                                        data-placement="top" title="Experience Info Add">Exp </a>
-                                        &nbsp;
-                                    <a href="{{ route('projects.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-warning" data-toggle="tooltip"
-                                        data-placement="top" title="Project Add">Project </a>
-                                    
-                                   
-                                </div>
-                            </td>
-                                <td class="d-flex">
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i>
-                                    </a>
-                                    &nbsp;
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>
                                     </a>
                                     &nbsp;
@@ -104,6 +77,11 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </form>
+                                    &nbsp;
+                                    <a href="{{ route('educations.create',['user_id' => $user->id]) }}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Education Info Add">Edu </a>
+                                    &nbsp;
+                                    <a href="" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Experience Info Add">Exp </a>
+                                     &nbsp;
                                 </td>
                             </tr>
                             @empty

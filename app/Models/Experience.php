@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Experience extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'company',
@@ -16,6 +17,7 @@ class Experience extends Model
         'started_at',
         'end_at',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

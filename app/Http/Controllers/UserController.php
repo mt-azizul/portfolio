@@ -59,7 +59,8 @@ class UserController extends Controller
         $data['page_title'] = 'User Profile';
         $data['model'] = 'Users';
         $data['user'] = $user;
-       return view('admin.users.show', $data);
+
+        return view('admin.users.show', $data);
     }
 
     public function edit(User $user)

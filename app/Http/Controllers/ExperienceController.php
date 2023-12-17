@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Experience;
 use App\Http\Requests\StoreExperienceRequest;
 use App\Http\Requests\UpdateExperienceRequest;
+use App\Models\Experience;
 use App\Models\User;
 
 class ExperienceController extends Controller
@@ -22,7 +22,13 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+
+        $data['page_title'] = 'Experiences Information Add';
+        $data['model'] = 'Experiences';
+        $user = User::findOrFail($_REQUEST['user_id'] ?? null);
+        $data['user'] = $user;
+
+        return view('admin.experiences.create', $data);
     }
 
     /**
@@ -60,7 +66,11 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        //
+        $data['page_title'] = 'Experience Information Update';
+        $data['model'] = 'Experiences';
+        $data['experience'] = $experience;
+
+        return view('admin.experiences.edit', $data);
     }
 
     /**
@@ -68,7 +78,9 @@ class ExperienceController extends Controller
      */
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
-        //
+        $experience->update($request->all());
+
+        return redirect()->route('users.show', $experience->user_id)->with('success', 'Experience Update successfully');
     }
 
     /**
@@ -76,6 +88,8 @@ class ExperienceController extends Controller
      */
     public function destroy(Experience $experience)
     {
-        //
+        $experience->delete();
+
+        return redirect()->route('users.show', $experience->user_id)->with('success', 'Experience Delete successfully');
     }
 }

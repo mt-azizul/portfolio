@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'midd
     Route::resource('skills', 'SkillController');
     Route::resource('socials', 'SocialMediaController');
     Route::resource('projects', 'ProjectController');
+    Route::resource('experiences', 'ExperienceController');
+    Route::resource('certifications', 'CertificationController');
 
 });
 

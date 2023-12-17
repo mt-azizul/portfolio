@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SocialMedia;
 use App\Http\Requests\StoreSocialMediaRequest;
 use App\Http\Requests\UpdateSocialMediaRequest;
+use App\Models\SocialMedia;
 use App\Models\User;
 
 class SocialMediaController extends Controller
@@ -45,7 +45,6 @@ class SocialMediaController extends Controller
             $user->socialMedia()->create($data);
         }
 
-
         return redirect()->route('users.show', $user->id);
     }
 
@@ -60,24 +59,32 @@ class SocialMediaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SocialMedia $socialMedia)
+    public function edit(SocialMedia $social)
     {
-        //
+        $data['page_title'] = 'SocialMedia Information Update';
+        $data['model'] = 'SocialMedia';
+        $data['socialMedia'] = $social;
+
+        return view('admin.socialmedia.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSocialMediaRequest $request, SocialMedia $socialMedia)
+    public function update(UpdateSocialMediaRequest $request, SocialMedia $social)
     {
-        //
+        $social->update($request->all());
+
+        return redirect()->route('users.show', $social->user_id)->with('success', 'SocialMedia Data Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SocialMedia $socialMedia)
+    public function destroy(SocialMedia $social)
     {
-        //
+        $social->delete();
+
+        return redirect()->back()->with('success', 'SocialMedia Data Deleted Successfully');
     }
 }
