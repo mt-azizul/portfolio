@@ -35,9 +35,19 @@ class EducationController extends Controller
      */
     public function store(StoreEducationRequest $request)
     {
-        Education::create($request->all());
+        $user = User::findOrFail($request->user_id);
+        foreach ($request->degree as $key => $degree) {
+            $data = [
+                'degree' => $degree,
+                'field_of_study' => $request->field_of_study[$key],
+                'institution' => $request->institution[$key],
+                'start_date' => $request->start_date[$key],
+                'end_date' => $request->end_date[$key],
+            ];
+            $user->educations()->create($data);
+        }
 
-        return redirect()->route('users.index')->with('success', 'Education Data Added Successfully');
+        return to_route('users.show', $user->id)->with('success', 'Education Data Added Successfully');
     }
 
     /**

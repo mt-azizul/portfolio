@@ -88,6 +88,13 @@ class User extends Authenticatable
         return $this->first_name.' '.$this->last_name;
     }
 
+    public function getProfessionAttribute()
+    {
+        $job = $this->experiences()->orderBy('started_at', 'desc')->whereNull('end_at')->first();
+
+        return $job->title ?? 'Unemployed';
+    }
+
     public function getUserName(): string
     {
         return "{$this->username}";

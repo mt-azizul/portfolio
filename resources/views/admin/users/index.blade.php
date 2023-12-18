@@ -113,7 +113,14 @@
                             @endforelse
 
                         </tbody>
+
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <p>Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} entries</p>
+                        <ul class="pagination justify-content-center">
+                      {{ $users->links('pagination::bootstrap-4') }}
+                   </ul>
+                    </nav>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -132,5 +139,11 @@
             var id = e.relatedTarget.dataset.id;
             $("#del_btn").attr("data-submit",id);
         });
+
+    $('#example1').DataTable({
+        "paging": false,
+        "ordering": false,
+         "info": false,
+    });
 </script>
 @stop

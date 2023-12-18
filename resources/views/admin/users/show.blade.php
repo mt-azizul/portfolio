@@ -37,7 +37,7 @@
 
                         <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
 
-                        <p class="text-muted text-center">Software Engineer</p>
+                        <p class="text-muted text-center">{{ $user->profession }}</p>
                         <div class="row justify-content-between">
                             <ul class="list-group list-group-unbordered mb-5 col-5">
                                 <li class="list-group-item">

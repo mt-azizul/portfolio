@@ -23,11 +23,11 @@ class StoreEducationRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer',
-            'degree' => 'required|string',
-            'field_of_study' => 'nullable|string',
-            'institution' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date',
+            'degree.*' => 'required|string',
+            'field_of_study.*' => 'nullable|string',
+            'institution.*' => 'required|string',
+            'start_date.*' => 'required|date',
+            'end_date.*' => 'nullable|date',
         ];
     }
 }
