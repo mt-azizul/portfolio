@@ -45,7 +45,7 @@ class UserController extends Controller
             $imageName = $request->username.'.'.$request->profic->getClientOriginalExtension();
             $path = $request->file('profic')->storePubliclyAs('users', $imageName, 'public');
             $url = Storage::url($path);
-            $user->profic = $imageName;
+            $user->profic = $url;
             $user->save();
         }
 
@@ -150,5 +150,13 @@ class UserController extends Controller
         } catch (Exception $e) {
             return $this->responseError([], $e->getMessage());
         }
+    }
+    public function profile(User $user){
+        $data[] = null;
+        $data['page_title'] = 'User Profile';
+        $data['model'] = 'Users';
+        $data['user'] = $user->load(['educations','skills', 'socialMedia','projects','experiences','certifications']);
+
+        return view('user-profile', $data);
     }
 }

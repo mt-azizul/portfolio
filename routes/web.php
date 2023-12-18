@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\FrontController::class, 'index']);
 
 Auth::routes();
 
@@ -33,6 +31,7 @@ Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'midd
 
 });
 
+Route::get('profile/{user}', 'App\Http\Controllers\UserController@profile')->name('users.profile');
 Route::any('/optimize', function () {
     Artisan::call('route:clear');
     Artisan::call('optimize');
