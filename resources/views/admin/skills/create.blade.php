@@ -93,7 +93,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Proficiency Level:</label>
-                                        <input type="text" name="level[]"
+                                        <input type="number" max="100" min="0" name="level[]"
                                             class="form-control filter-input" placeholder="Enter Level">
                                     </div>
                                 </div>

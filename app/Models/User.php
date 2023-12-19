@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function educations()
     {
-        return $this->hasMany(Education::class);
+        return $this->hasMany(Education::class)->latest('end_date', 'asc');
     }
 
     public function socialMedia()
@@ -87,7 +87,14 @@ class User extends Authenticatable
     {
         return $this->first_name.' '.$this->last_name;
     }
-
+    public function getAgeAttribute()
+    {
+        return now()->diffInYears($this->dob);
+    }
+    public function getAddressAttribute()
+    {
+        return "{$this->area}, {$this->city},{$this->country}";
+    }
     public function getProfessionAttribute()
     {
         $job = $this->experiences()->orderBy('started_at', 'desc')->whereNull('end_at')->first();

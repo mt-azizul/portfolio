@@ -24,4 +24,12 @@ class Education extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getEndYearAttribute()
+    {
+        if($this->end_date == null){
+            return 'Present';
+        }
+        return date('Y', strtotime($this->end_date));
+    }
+
 }

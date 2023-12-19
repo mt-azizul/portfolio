@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BreezyCV - Resume / CV / vCard Template</title>
+    <title>{{ $user->full_name }} Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="BreezyCV - Resume / CV / vCard Template" />
     <meta name="keywords"
@@ -41,11 +41,12 @@
             <header id="site_header" class="header mobile-menu-hide">
                 <div class="header-content">
                     <div class="header-photo">
-                        <img src="{{asset('front/img/main_photo.jpg')}}" alt="Alex Smith">
+                        <img src="{{asset($user->profic)}}" alt="{{ $user->full_name }}"
+                            onerror="this.src='../../front/img/main_photo.jpg'">
                     </div>
                     <div class="header-titles">
-                        <h2>Alex Smith</h2>
-                        <h4>Web Designer</h4>
+                        <h2>{{ $user->full_name }}</h2>
+                        <h4>{{ $user->profession }}</h4>
                     </div>
                 </div>
 
@@ -71,7 +72,7 @@
                     <li>
                         <a href="#portfolio" class="nav-anim">
                             <span class="menu-icon lnr lnr-briefcase"></span>
-                            <span class="link-text">Portfolio</span>
+                            <span class="link-text">Projects</span>
                         </a>
                     </li>
                     <li>
@@ -90,17 +91,18 @@
 
                 <div class="social-links">
                     <ul>
-                        <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        @forelse ($user->socialMedia as $media )
+                        <li><a href="{{ $media->link }}" target="_blank"><i class="{{ $media->icon }}"></i></a></li>
+                        @empty
+                        @endforelse
                     </ul>
                 </div>
 
                 <div class="header-buttons">
-                    <a href="#" target="_blank" class="btn btn-primary">Download CV</a>
+                    <a href="{{ route('cv.download',$user->id) }}" target="_blank" class="btn btn-primary">Download CV</a>
                 </div>
 
-                <div class="copyrights">© 2020 All rights reserved.</div>
+                <div class="copyrights">© {{ now()->format('Y') }} All rights reserved.</div>
             </header>
 
             <!-- Mobile Navigation -->
@@ -127,14 +129,16 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="title-block">
-                                        <h2>Alex Smith</h2>
+                                        <h2>{{ $user->full_name }}</h2>
                                         <div class="owl-carousel text-rotation">
                                             <div class="item">
-                                                <div class="sp-subtitle">Web Designer</div>
+                                                {{-- <div class="sp-subtitle">Web Designer</div> --}}
+                                                <div class="sp-subtitle">{{ $user->profession }}</div>
                                             </div>
 
                                             <div class="item">
-                                                <div class="sp-subtitle">Frontend-developer</div>
+                                                {{-- <div class="sp-subtitle">Frontend-developer</div> --}}
+                                                <div class="sp-subtitle">{{ $user->profession }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -155,11 +159,9 @@
                             <!-- Personal Information -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-7">
-                                    <p>Proin volutpat mauris ac pellentesque pharetra. Suspendisse congue elit vel odio
-                                        suscipit, sit amet tempor nisl imperdiet. Quisque ex justo, faucibus ut mi in,
-                                        condimentum finibus dolor. Aliquam vitae hendrerit dolor, eget imperdiet mauris.
-                                        Maecenas et ante id ipsum condimentum dictum et vel massa. Ut in imperdiet
-                                        dolor, vel consectetur dui.</p>
+                                    <p>
+                                        {{ $user->bio }}
+                                    </p>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-5">
@@ -167,27 +169,27 @@
                                         <ul>
                                             <li>
                                                 <span class="title">Age</span>
-                                                <span class="value">32</span>
+                                                <span class="value">{{ $user->age }}</span>
                                             </li>
 
                                             <li>
                                                 <span class="title">Residence</span>
-                                                <span class="value">USA</span>
+                                                <span class="value">{{ $user->residence }}</span>
                                             </li>
 
                                             <li>
                                                 <span class="title">Address</span>
-                                                <span class="value">88 Some Street, Some Town</span>
+                                                <span class="value">{{ $user->address }}</span>
                                             </li>
 
                                             <li>
                                                 <span class="title">e-mail</span>
-                                                <span class="value">email@example.com</span>
+                                                <span class="value">{{ $user->email }}</span>
                                             </li>
 
                                             <li>
                                                 <span class="title">Phone</span>
-                                                <span class="value">+0123 123 456 789</span>
+                                                <span class="value">{{ $user->phone }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -284,7 +286,8 @@
                                         <!-- Testimonial 1 -->
                                         <div class="testimonial">
                                             <div class="img">
-                                                <img src="{{asset('front/img/testimonials/testimonial-1.jpg')}}" alt="Alex Smith">
+                                                <img src="{{asset('front/img/testimonials/testimonial-1.jpg')}}"
+                                                    alt="Alex Smith">
                                             </div>
                                             <div class="text">
                                                 <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor.
@@ -305,7 +308,8 @@
                                         <!-- Testimonial 2 -->
                                         <div class="testimonial">
                                             <div class="img">
-                                                <img src="{{asset('front/img/testimonials/testimonial-2.jpg')}}" alt="Alex Smith">
+                                                <img src="{{asset('front/img/testimonials/testimonial-2.jpg')}}"
+                                                    alt="Alex Smith">
                                             </div>
                                             <div class="text">
                                                 <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor.
@@ -326,7 +330,8 @@
                                         <!-- Testimonial 3 -->
                                         <div class="testimonial">
                                             <div class="img">
-                                                <img src="{{asset('front/img/testimonials/testimonial-3.jpg')}}" alt="Alex Smith">
+                                                <img src="{{asset('front/img/testimonials/testimonial-3.jpg')}}"
+                                                    alt="Alex Smith">
                                             </div>
                                             <div class="text">
                                                 <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor.
@@ -536,33 +541,22 @@
                                     </div>
 
                                     <div class="timeline timeline-second-style clearfix">
+                                        @forelse ($user->educations as $education)
                                         <div class="timeline-item clearfix">
                                             <div class="left-part">
-                                                <h5 class="item-period">2008</h5>
-                                                <span class="item-company">University of Studies</span>
+                                                <h5 class="item-period">{{$education->end_year}}</h5>
+                                                <span class="item-company">{{ $education->institution }}</span>
                                             </div>
                                             <div class="divider"></div>
                                             <div class="right-part">
-                                                <h4 class="item-title">Frontend Development</h4>
-                                                <p>Maecenas finibus nec sem ut imperdiet. Ut tincidunt est ac dolor
-                                                    aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in,
-                                                    lobortis ante.</p>
+                                                <h4 class="item-title">{{ $education->degree }}</h4>
+                                                <p>{{ $education->field_of_study }}</p>
                                             </div>
                                         </div>
+                                        @empty
 
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2007</h5>
-                                                <span class="item-company">University of Studies</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">Graphic Design</h4>
-                                                <p>Aliquam tincidunt malesuada tortor vitae iaculis. In eu turpis
-                                                    iaculis, feugiat risus quis, aliquet urna. Quisque fringilla mollis
-                                                    risus, eu pulvinar dolor.</p>
-                                            </div>
-                                        </div>
+                                        @endforelse
+
                                     </div>
 
                                     <div class="white-space-50"></div>
@@ -572,47 +566,22 @@
                                     </div>
 
                                     <div class="timeline timeline-second-style clearfix">
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2016 - Current</h5>
-                                                <span class="item-company">Google</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">Lead Ui/Ux Designer</h4>
-                                                <p>Praesent dignissim sollicitudin justo, sed elementum quam lacinia
-                                                    quis. Phasellus eleifend tristique posuere. Sed vitae dui nec magna.
-                                                </p>
-                                            </div>
-                                        </div>
 
+                                        @forelse ($user->experiences as $experience)
                                         <div class="timeline-item clearfix">
                                             <div class="left-part">
-                                                <h5 class="item-period">2013 - 2016</h5>
-                                                <span class="item-company">Adobe</span>
+                                                <h5 class="item-period">{{ $experience->start_year}} - {{
+                                                    $experience->end_year }}</h5>
+                                                <span class="item-company">{{ $experience->company }}</span>
                                             </div>
                                             <div class="divider"></div>
                                             <div class="right-part">
-                                                <h4 class="item-title">Senior Ui/Ux Designer</h4>
-                                                <p>Maecenas tempus faucibus rutrum. Duis eu aliquam urna. Proin vitae
-                                                    nulla tristique, ornare felis id, congue libero. Nam volutpat
-                                                    euismod quam.</p>
+                                                <h4 class="item-title">{{ $experience->title }}</h4>
+                                                <p>{{ $experience->description }}</p>
                                             </div>
                                         </div>
-
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2011 - 2013</h5>
-                                                <span class="item-company">Google</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">Junior Ui/Ux Designer</h4>
-                                                <p>Duis mollis nunc quis quam viverra venenatis. Nulla nulla arcu,
-                                                    congue vitae nunc ac, sodales ultricies diam. Nullam justo leo,
-                                                    tincidunt sit amet.</p>
-                                            </div>
-                                        </div>
+                                        @empty
+                                        @endforelse
                                     </div>
 
                                 </div>
@@ -621,62 +590,38 @@
                                 <div class="col-xs-12 col-sm-5">
                                     <!-- Design Skills -->
                                     <div class="block-title">
-                                        <h3>Design <span>Skills</span></h3>
+                                        <h3>Skills <span></span></h3>
                                     </div>
 
                                     <div class="skills-info skills-second-style">
                                         <!-- Skill 1 -->
+                                        @forelse ($user->skills as $skill )
                                         <div class="skill clearfix">
-                                            <h4>Web Design</h4>
-                                            <div class="skill-value">95%</div>
+                                            <h4>{{ $skill->name }}</h4>
+                                            <div class="skill-value">{{ $skill->level }}%</div>
+                                            @php
+                                                $width = $skill->level."% !important";
+                                            @endphp
                                         </div>
                                         <div class="skill-container skill-1">
-                                            <div class="skill-percentage"></div>
+                                            <div class="skill-percentage" style="width:{{ $width }}"></div>
                                         </div>
+                                        @empty
+
+                                        @endforelse
                                         <!-- End of Skill 1 -->
-
-                                        <!-- Skill 2 -->
-                                        <div class="skill clearfix">
-                                            <h4>Print Design</h4>
-                                            <div class="skill-value">65%</div>
-                                        </div>
-                                        <div class="skill-container skill-2">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 2 -->
-
-                                        <!-- Skill 3 -->
-                                        <div class="skill clearfix">
-                                            <h4>Logo Design</h4>
-                                            <div class="skill-value">80%</div>
-                                        </div>
-                                        <div class="skill-container skill-3">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 3 -->
-
-                                        <!-- Skill 4 -->
-                                        <div class="skill clearfix">
-                                            <h4>Graphic Design</h4>
-                                            <div class="skill-value">90%</div>
-                                        </div>
-                                        <div class="skill-container skill-4">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 4 -->
 
                                     </div>
                                     <!-- End of Design Skills -->
 
-                                    <div class="white-space-10"></div>
+                                    {{-- <div class="white-space-10"></div> --}}
 
                                     <!-- Coding Skills -->
-                                    <div class="block-title">
+                                    {{-- <div class="block-title">
                                         <h3>Coding <span>Skills</span></h3>
                                     </div>
 
                                     <div class="skills-info skills-second-style">
-                                        <!-- Skill 5 -->
                                         <div class="skill clearfix">
                                             <h4>JavaScript</h4>
                                             <div class="skill-value">95%</div>
@@ -684,54 +629,13 @@
                                         <div class="skill-container skill-5">
                                             <div class="skill-percentage"></div>
                                         </div>
-                                        <!-- End of Skill 5 -->
-
-                                        <!-- Skill 6 -->
-                                        <div class="skill clearfix">
-                                            <h4>PHP</h4>
-                                            <div class="skill-value">85%</div>
-                                        </div>
-                                        <div class="skill-container skill-6">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 6 -->
-
-                                        <!-- Skill 7 -->
-                                        <div class="skill clearfix">
-                                            <h4>HTML/CSS</h4>
-                                            <div class="skill-value">100%</div>
-                                        </div>
-                                        <div class="skill-container skill-7">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 7 -->
-
-                                        <!-- Skill 8 -->
-                                        <div class="skill clearfix">
-                                            <h4>Smarty/Twig</h4>
-                                            <div class="skill-value">75%</div>
-                                        </div>
-                                        <div class="skill-container skill-8">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 8 -->
-
-                                        <!-- Skill 9 -->
-                                        <div class="skill clearfix">
-                                            <h4>Perl</h4>
-                                            <div class="skill-value">90%</div>
-                                        </div>
-                                        <div class="skill-container skill-9">
-                                            <div class="skill-percentage"></div>
-                                        </div>
-                                        <!-- End of Skill 9 -->
-                                    </div>
+                                    </div> --}}
                                     <!-- End of Coding Skills -->
 
-                                    <div class="white-space-10"></div>
+                                    {{-- <div class="white-space-10"></div> --}}
 
                                     <!-- Knowledges -->
-                                    <div class="block-title">
+                                    {{-- <div class="block-title">
                                         <h3>Knowledges</h3>
                                     </div>
 
@@ -745,7 +649,7 @@
                                         <li>Problem-Solving</li>
                                         <li>Social Networking</li>
                                         <li>Flexibility</li>
-                                    </ul>
+                                    </ul> --}}
                                     <!-- End of Knowledges -->
                                 </div>
                                 <!-- End of Skills & Certificates -->
@@ -764,6 +668,7 @@
 
                             <div class="row">
                                 <!-- Certificate 1 -->
+                                @forelse ($user->certifications as $certificate )
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="certificate-item clearfix">
                                         <div class="certi-logo">
@@ -772,13 +677,14 @@
 
                                         <div class="certi-content">
                                             <div class="certi-title">
-                                                <h4>Psyhology of Intertnation Design</h4>
+                                                <h4>{{ $certificate->name }}</h4>
                                             </div>
                                             <div class="certi-id">
-                                                <span>Membership ID: XXXX</span>
+                                                {{-- <span>Membership ID: XXXX</span> --}}
                                             </div>
                                             <div class="certi-date">
-                                                <span>19 April 2018</span>
+                                                <span>{{ date('d M Y ', strtotime($certificate->issued_date)) }}</span>
+                                                {{-- <span>19 April 2018</span> --}}
                                             </div>
                                             <div class="certi-company">
                                                 <span></span>
@@ -786,32 +692,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                @empty
+
+                                @endforelse
                                 <!-- End of Certificate 1 -->
-
-                                <!-- Certificate 2 -->
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="certificate-item clearfix">
-                                        <div class="certi-logo">
-                                            <img src="{{asset('front/img/clients/client-1.png')}}" alt="logo">
-                                        </div>
-
-                                        <div class="certi-content">
-                                            <div class="certi-title">
-                                                <h4>Psyhology of Intertnation Design</h4>
-                                            </div>
-                                            <div class="certi-id">
-                                                <span>Membership ID: XXXX</span>
-                                            </div>
-                                            <div class="certi-date">
-                                                <span>19 April 2018</span>
-                                            </div>
-                                            <div class="certi-company">
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End of Certificate 2 -->
 
                             </div>
                             <!-- End of Certificates -->
@@ -823,7 +707,7 @@
                     <section data-id="portfolio" class="animated-section">
                         <div class="section-content">
                             <div class="page-title">
-                                <h2>Portfolio</h2>
+                                <h2>Projects</h2>
                             </div>
 
                             <div class="row">
@@ -831,7 +715,7 @@
                                     <!-- Portfolio Content -->
                                     <div class="portfolio-content">
 
-                                        <ul class="portfolio-filters">
+                                        {{-- <ul class="portfolio-filters">
                                             <li class="active">
                                                 <a class="filter btn btn-sm btn-link" data-group="category_all">All</a>
                                             </li>
@@ -855,15 +739,16 @@
                                                 <a class="filter btn btn-sm btn-link"
                                                     data-group="category_youtube-videos">YouTube Videos</a>
                                             </li>
-                                        </ul>
+                                        </ul> --}}
 
                                         <!-- Portfolio Grid -->
                                         <div class="portfolio-grid three-columns">
 
-                                            <figure class="item lbaudio"
+                                            {{-- <figure class="item lbaudio"
                                                 data-groups='["category_all", "category_soundcloud"]'>
                                                 <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/1.jpg')}}" alt="SoundCloud Audio" title="" />
+                                                    <img src="{{asset('front/img/portfolio/1.jpg')}}"
+                                                        alt="SoundCloud Audio" title="" />
                                                     <a href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/221650664&#038;color=%23ff5500&#038;auto_play=false&#038;hide_related=false&#038;show_comments=true&#038;show_user=true&#038;show_reposts=false&#038;show_teaser=true&#038;visual=true"
                                                         class="lightbox mfp-iframe" title="SoundCloud Audio"></a>
                                                 </div>
@@ -871,24 +756,27 @@
                                                 <i class="fa fa-volume-up"></i>
                                                 <h4 class="name">SoundCloud Audio</h4>
                                                 <span class="category">SoundCloud</span>
-                                            </figure>
+                                            </figure> --}}
+                                            @forelse ($user->projects as $project )
+                                                <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
+                                                    <div class="portfolio-item-img">
+                                                        <img src="{{asset('front/img/portfolio/2.jpg')}}" alt="Media Project 2" title="" />
+                                                        <a href="{{ $project->live_link??$project->repo_link }}" target="_blank"></a>
+                                                    </div>
+                                                
+                                                    <i class="far fa-file-alt"></i>
+                                                    <h4 class="name">{{ $project->title }}</h4>
+                                                    <span class="category">{{ $project->title }}</span>
+                                                </figure>
+                                            @empty
+                                                
+                                            @endforelse
 
-                                            <figure class="item standard"
-                                                data-groups='["category_all", "category_detailed"]'>
-                                                <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/2.jpg')}}" alt="Media Project 2" title="" />
-                                                    <a href="portfolio-1.html" class="ajax-page-load"></a>
-                                                </div>
-
-                                                <i class="far fa-file-alt"></i>
-                                                <h4 class="name">Detailed Project 2</h4>
-                                                <span class="category">Detailed</span>
-                                            </figure>
-
-                                            <figure class="item lbvideo"
+                                            {{-- <figure class="item lbvideo"
                                                 data-groups='["category_all", "category_vimeo-videos"]'>
                                                 <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/3.jpg')}}" alt="Vimeo Video 1" title="" />
+                                                    <img src="{{asset('front/img/portfolio/3.jpg')}}"
+                                                        alt="Vimeo Video 1" title="" />
                                                     <a href="https://player.vimeo.com/video/158284739"
                                                         class="lightbox mfp-iframe" title="Vimeo Video 1"></a>
                                                 </div>
@@ -901,7 +789,8 @@
                                             <figure class="item standard"
                                                 data-groups='["category_all", "category_detailed"]'>
                                                 <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/4.jpg')}}" alt="Media Project 1" title="" />
+                                                    <img src="{{asset('front/img/portfolio/4.jpg')}}"
+                                                        alt="Media Project 1" title="" />
                                                     <a href="portfolio-1.html" class="ajax-page-load"></a>
                                                 </div>
 
@@ -913,7 +802,8 @@
                                             <figure class="item lbimage"
                                                 data-groups='["category_all", "category_mockups"]'>
                                                 <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/5.jpg')}}" alt="Mockup Design 1" title="" />
+                                                    <img src="{{asset('front/img/portfolio/5.jpg')}}"
+                                                        alt="Mockup Design 1" title="" />
                                                     <a class="lightbox" title="Mockup Design 1"
                                                         href="img/portfolio/full/5.jpg')}}"></a>
                                                 </div>
@@ -926,7 +816,8 @@
                                             <figure class="item lbvideo"
                                                 data-groups='["category_all", "category_youtube-videos"]'>
                                                 <div class="portfolio-item-img">
-                                                    <img src="{{asset('front/img/portfolio/6.jpg')}}" alt="YouTube Video 1" title="" />
+                                                    <img src="{{asset('front/img/portfolio/6.jpg')}}"
+                                                        alt="YouTube Video 1" title="" />
                                                     <a href="https://www.youtube.com/embed/bg0gv2YpIok"
                                                         class="lightbox mfp-iframe" title="YouTube Video 1"></a>
                                                 </div>
@@ -934,7 +825,7 @@
                                                 <i class="fas fa-video"></i>
                                                 <h4 class="name">YouTube Video 1</h4>
                                                 <span class="category">YouTube Videos</span>
-                                            </figure>
+                                            </figure> --}}
                                         </div>
                                     </div>
                                     <!-- End of Portfolio Content -->
@@ -1077,21 +968,21 @@
                                 <div class="col-xs-12 col-sm-4">
                                     <div class="lm-info-block gray-default">
                                         <i class="lnr lnr-map-marker"></i>
-                                        <h4>San Francisco</h4>
+                                    <h4>{{ $user->city }}</h4>
                                         <span class="lm-info-block-value"></span>
                                         <span class="lm-info-block-text"></span>
                                     </div>
 
                                     <div class="lm-info-block gray-default">
                                         <i class="lnr lnr-phone-handset"></i>
-                                        <h4>415-832-2000</h4>
+                                        <h4>{{ $user->phone }}</h4>
                                         <span class="lm-info-block-value"></span>
                                         <span class="lm-info-block-text"></span>
                                     </div>
 
                                     <div class="lm-info-block gray-default">
                                         <i class="lnr lnr-envelope"></i>
-                                        <h4>alex@example.com</h4>
+                                        <h4>{{ $user->email }}</h4>
                                         <span class="lm-info-block-value"></span>
                                         <span class="lm-info-block-text"></span>
                                     </div>
@@ -1109,7 +1000,13 @@
 
                                 <!-- Contact Form -->
                                 <div class="col-xs-12 col-sm-8">
-                                    <div id="map" class="map"></div>
+                                    {{-- <div class="map" id="map">  --}}
+                                        <div class="map" id="">
+                                        <iframe class="col-12"
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40054.41152013551!2d-122.44476020966536!3d37.76455608450598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1702976789622!5m2!1sen!2sbd"
+                                            style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
                                     <div class="block-title">
                                         <h3>How Can I <span>Help You?</span></h3>
                                     </div>

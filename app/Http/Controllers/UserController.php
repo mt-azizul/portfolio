@@ -151,12 +151,5 @@ class UserController extends Controller
             return $this->responseError([], $e->getMessage());
         }
     }
-    public function profile(User $user){
-        $data[] = null;
-        $data['page_title'] = 'User Profile';
-        $data['model'] = 'Users';
-        $data['user'] = $user->load(['educations','skills', 'socialMedia','projects','experiences','certifications']);
-
-        return view('user-profile', $data);
-    }
+    
 }

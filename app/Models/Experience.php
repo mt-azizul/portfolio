@@ -22,4 +22,15 @@ class Experience extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getStartYearAttribute()
+    {
+        return date('Y', strtotime($this->started_at));
+    }
+    public function getEndYearAttribute()
+    {
+        if($this->end_at == null){
+            return 'Current';
+        }
+        return date('Y', strtotime($this->end_at));
+    }
 }
