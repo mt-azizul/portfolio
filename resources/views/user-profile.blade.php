@@ -67,7 +67,7 @@
             </div>
 
             <div class="header-buttons">
-                <a href="{{ route('cv.download',$user->id) }}" target="_blank" class="btn btn-primary">Download CV</a>
+                <a href="{{ route('cv.download',$user->id) }}" class="btn btn-primary">Download CV</a>
             </div>
             <br>
             <div>
