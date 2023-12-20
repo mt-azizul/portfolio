@@ -22,7 +22,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item ">
-                <a href="{{ url('/') }}" class="nav-link">
+                <a href="{{ url('/home') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -31,30 +31,19 @@
             </li>
 
             <!--users  start-->
-            <li class="nav-item has-treeview {{ isActive(['admin/details*']) }}">
-                <a href="#" class="nav-link {{ isActive(['admin/details*']) }}">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        Users
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
+            <li class="nav-item has-treeview {{ isActive(['admin/users/create']) }}">
+                <a href="{{ route('users.create') }}" class="nav-link {{ isActive(['admin/users/create']) }}">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Add Users</p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route('users.create') }}"
-                            class="nav-link {{ isActive(['admin/users/create']) }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Add Users</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('users.index') }}" class="nav-link {{ isActive('[users]') }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>All Users</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
+            <li class="nav-item has-treeview {{ isActive(['admin/users']) }}">
+                <a href="{{ route('users.index') }}" class="nav-link {{ isActive(['admin/users']) }}">
+                    <i class="fas fa-users"></i>
+                   <p>All Users</p>
+                </a>
+            </li>
+            
             <!--users end-->
             <!--users  start-->
             <li class="nav-item has-treeview {{ isActive(['admin/settings*']) }}">

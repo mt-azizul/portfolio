@@ -43,7 +43,7 @@
                     <div class="inner">
                         <h3>12</h3>
 
-                        <p>Category</p>
+                        <p>Lorem</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-gavel"></i>
@@ -54,11 +54,11 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-warning">
+                <div class="small-box bg-primary">
                     <div class="inner">
                         <h3>15</h3>
 
-                        <p>Category</p>
+                        <p>Epsum</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-users"></i>
@@ -73,7 +73,7 @@
                     <div class="inner">
                         <h3>17</h3>
 
-                        <p>Lorem</p>
+                        <p>Dollars</p>
                     </div>
                     <div class="icon">
                         <i class="far fa-calendar"></i>
