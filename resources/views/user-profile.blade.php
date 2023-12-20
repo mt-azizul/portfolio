@@ -22,10 +22,9 @@
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="lm-animated-bg" style="background-image: url(img/main_bg.png);"></div>
+   <!-- Animated Background -->
+    <div class="lm-animated-bg" style="background-image: url(front/img/main_bg.png);"></div>
     <!-- /Animated Background -->
-
     <!-- Loading animation -->
     <div class="preloader">
         <div class="preloader-animation">
@@ -100,6 +99,10 @@
 
                 <div class="header-buttons">
                     <a href="{{ route('cv.download',$user->id) }}" target="_blank" class="btn btn-primary">Download CV</a>
+                </div>
+                <br>
+                <div >
+                    <a href="{{ url('/') }}" class="btn btn-primary"><span style="font-weight: bold;" class="lnr lnr-arrow-left"></span></a>
                 </div>
 
                 <div class="copyrights">© {{ now()->format('Y') }} All rights reserved.</div>

@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home Portfolio</title>
+    <title>Home {{ $settings->where('key','name')->first()->value??'' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="BreezyCV - Resume / CV / vCard Template" />
     <meta name="keywords"
         content="vcard, resposnive, retina, resume, jquery, css3, bootstrap, Material CV, portfolio" />
     <meta name="author" content="lmpixels" />
-    <link rel="shortcut icon" href="{{ asset('front/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
     <link rel="stylesheet" href="{{asset('front/css/reset.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('front/css/bootstrap-grid.min.css')}}" type="text/css">
@@ -104,7 +104,7 @@
 
 <body>
     <!-- Animated Background -->
-    <div class="lm-animated-bg" style="background-image: url(img/main_bg.png);"></div>
+    <div class="lm-animated-bg" style="background-image: url(front/img/main_bg.png);"></div>
     <!-- /Animated Background -->
 
     <!-- Loading animation -->
@@ -122,11 +122,11 @@
             <header id="site_header" class="header mobile-menu-hide">
                 <div class="header-content">
                     <div class="header-photo">
-                        <img src="{{asset('front/img/company_logo.jpg')}}" alt="Alex Smith">
+                        <img src="{{ asset('images/logo.png')}}" alt="Alex Smith">
                     </div>
                     <div class="header-titles">
-                        <h2>XYZ Company</h2>
-                        <h4>New York</h4>
+                        <h2>{{ $settings->where('key','name')->first()->value??'' }}</h2>
+                        <h4>{{ $settings->where('key','address')->first()->value??'' }}</h4>
                     </div>
                 </div>
 
@@ -137,53 +137,43 @@
                             <span class="link-text">Home</span>
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="#about-me" class="nav-anim">
-                            <span class="menu-icon lnr lnr-user"></span>
-                            <span class="link-text">About Me</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#resume" class="nav-anim">
-                            <span class="menu-icon lnr lnr-graduation-hat"></span>
-                            <span class="link-text">Resume</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#portfolio" class="nav-anim">
-                            <span class="menu-icon lnr lnr-briefcase"></span>
-                            <span class="link-text">Portfolio</span>
-                        </a>
-                    </li> --}}
                     <li>
                         <a href="#blog" class="nav-anim">
                             <span class="menu-icon lnr lnr-book"></span>
                             <span class="link-text">Blog</span>
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="#contact" class="nav-anim">
-                            <span class="menu-icon lnr lnr-envelope"></span>
-                            <span class="link-text">Contact</span>
-                        </a>
-                    </li> --}}
                 </ul>
 
                 <div class="social-links">
                     <ul>
-                        <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="{{ $settings->where('key','linkedin')->first()->value??'' }}" target="_blank"><i
+                                    class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ $settings->where('key','facebook')->first()->value??'' }}" target="_blank"><i
+                                    class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="{{ $settings->where('key','twitter')->first()->value??'' }}" target="_blank"><i
+                                    class="fab fa-twitter"></i></a></li>
+                        <li><a href="{{ $settings->where('key','instagram')->first()->value??'' }}" target="_blank"><i
+                                    class="fab fa-instagram"></i></a></li>
                     </ul>
                 </div>
 
-                {{-- <div class="header-buttons">
-                    <a href="#" target="_blank" class="btn btn-primary">Download CV</a>
-                </div> --}}
-
                 <div class="copyrights">© {{ date('Y') }} All rights reserved.</div>
             </header>
+            <!-- Mobile Navigation -->
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- End Mobile Navigation -->
 
+            <!-- Arrows Nav -->
+            <div class="lmpixels-arrows-nav">
+                <div class="lmpixels-arrow-right"><i class="lnr lnr-chevron-right"></i></div>
+                <div class="lmpixels-arrow-left"><i class="lnr lnr-chevron-left"></i></div>
+            </div>
+            <!-- End Arrows Nav -->
             <div class="content-area">
                 <div class="animated-sections">
                     <!-- Home Subpage -->
@@ -262,11 +252,11 @@
                             <div class="page-title">
                                 <h2>Blog</h2>
                             </div>
-                    
+
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="blog-masonry two-columns clearfix">
-                    
+
                                         <!-- Blog Post 1 -->
                                         <div class="item post-1">
                                             <div class="blog-card">
@@ -291,7 +281,7 @@
                                             </div>
                                         </div>
                                         <!-- End of Blog Post 1 -->
-                    
+
                                         <!-- Blog Post 2 -->
                                         <div class="item post-2">
                                             <div class="blog-card">
@@ -302,7 +292,8 @@
                                                     <a href="blog-post-1.html">
                                                         <img src="{{asset('front/img/blog/blog_post_2.jpg')}}"
                                                             class="size-blog-masonry-image-two-c"
-                                                            alt="Best Practices for Animated Progress Indicators" title="" />
+                                                            alt="Best Practices for Animated Progress Indicators"
+                                                            title="" />
                                                         <div class="mask"></div>
                                                     </a>
                                                 </div>
@@ -316,7 +307,7 @@
                                             </div>
                                         </div>
                                         <!-- End of Blog Post 2 -->
-                    
+
                                         <!-- Blog Post 3 -->
                                         <div class="item post-1">
                                             <div class="blog-card">
@@ -327,7 +318,8 @@
                                                     <a href="blog-post-1.html">
                                                         <img src="{{asset('front/img/blog/blog_post_3.jpg')}}"
                                                             class="size-blog-masonry-image-two-c"
-                                                            alt="Designing the Perfect Feature Comparison Table" title="" />
+                                                            alt="Designing the Perfect Feature Comparison Table"
+                                                            title="" />
                                                         <div class="mask"></div>
                                                     </a>
                                                 </div>
@@ -341,7 +333,7 @@
                                             </div>
                                         </div>
                                         <!-- End of Blog Post 3 -->
-                    
+
                                         <!-- Blog Post 4 -->
                                         <div class="item post-2">
                                             <div class="blog-card">
@@ -351,8 +343,8 @@
                                                     </div>
                                                     <a href="blog-post-1.html">
                                                         <img src="{{asset('front/img/blog/blog_post_4.jpg')}}"
-                                                            class="size-blog-masonry-image-two-c" alt="An Overview of E-Commerce Platforms"
-                                                            title="" />
+                                                            class="size-blog-masonry-image-two-c"
+                                                            alt="An Overview of E-Commerce Platforms" title="" />
                                                         <div class="mask"></div>
                                                     </a>
                                                 </div>
@@ -370,11 +362,11 @@
                                 </div>
                             </div>
                         </div>
-                    
-                    
+
+
                     </section>
                     <!-- End of Blog Subpage -->
-                    
+
                 </div>
             </div>
 

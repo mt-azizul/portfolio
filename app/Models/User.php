@@ -99,7 +99,7 @@ class User extends Authenticatable
     {
         $job = $this->experiences()->orderBy('started_at', 'desc')->whereNull('end_at')->first();
 
-        return $job->title ?? 'Unemployed';
+        return $job->title ?? '';
     }
 
     public function getUserName(): string

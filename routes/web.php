@@ -32,7 +32,7 @@ Route::any('/migrate', function () {
 });
 
 
-Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'middleware' => ['auth','admin']], function () {
     Route::resource('users', 'UserController');
     Route::resource('educations', 'EducationController');
     Route::resource('skills', 'SkillController');
@@ -40,5 +40,6 @@ Route::group(['prefix' => 'admin/', 'namespace' => 'App\Http\Controllers', 'midd
     Route::resource('projects', 'ProjectController');
     Route::resource('experiences', 'ExperienceController');
     Route::resource('certifications', 'CertificationController');
+    Route::resource('settings', 'SettingController');
 
 });

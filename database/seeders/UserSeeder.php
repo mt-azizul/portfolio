@@ -12,12 +12,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'One',
-            'username' => 'admin',
-            'email' => 'admin@email.com',
-            'password' => '123456',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@email.com',],
+            [
+                'first_name' => 'Admin',
+                'last_name' => 'One',
+                'username' => 'admin',
+                'role' => 'admin',
+                'email' => 'admin@email.com',
+                'password' => '123456',
+            ]
+        );
     }
 }

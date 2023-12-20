@@ -56,6 +56,16 @@
                 </ul>
             </li>
             <!--users end-->
+            <!--users  start-->
+            <li class="nav-item has-treeview {{ isActive(['admin/settings*']) }}">
+                <a href="{{ route('settings.index') }}" class="nav-link {{ isActive(['admin/settings*']) }}">
+                    <i class="nav-icon fas fa-cog"></i>
+                    <p>
+                        Settings
+                    </p>
+                </a>
+            </li>
+            <!--users end-->
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

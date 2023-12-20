@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ class FrontController extends Controller
                     ->orWhere('last_name', 'like', '%' . $request->search . '%');
             })
             ->paginate(5);
+        $data['settings'] = Setting::get();
         return view('welcome', $data);
     }
     public function profile(User $user)
